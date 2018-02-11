@@ -1,0 +1,17 @@
+h1{
+text-align:center;
+margin-top: 120px;
+border: 1px solid blue;
+opacity: 0.6;
+background-color: #9f2 ;
+font-family: 'Domine', serif;
+color:#826;
+border-radius: 20px;
+
+}
+body {
+    background-image: url("img/forest.jpg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "sampleCount": 33,
+    "missSpell": 5
+  },
+  {
+    "standardCount": 55,
+    "missSpell1": 7
+  },
+  {
+    "perWordCount": 60,
+    "percentMissSpell": 71
+  }
+]

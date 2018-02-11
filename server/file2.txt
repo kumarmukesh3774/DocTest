@@ -1,0 +1,18 @@
+Hi friends ,how many of you think that in one hour we can learn HTML.
+All right, none .
+Well hello ,I am gonna teach you all about HTML.
+Let us start!
+
+<!doctype html>
+<html>
+<head>
+<title>This is a test Web</title>
+</head>
+<body>
+<div>
+<p>
+Hello friends I am HTML.
+</p>
+</div>
+</body>
+</html>

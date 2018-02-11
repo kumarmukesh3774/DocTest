@@ -1,0 +1,14 @@
+Hi everyone I hope you all are doing well. 
+
+<!doctype html>
+<html>
+<head>
+<title>This is a test file</title>
+</head>
+<body>
+<div>
+<p>
+Hello friends I am JavaScript.
+</p></div>
+</body>
+</html>
