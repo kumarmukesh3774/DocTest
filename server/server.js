@@ -5,10 +5,30 @@ var data=fs.readFileSync('file1.txt','utf8');
 var data1=fs.readFileSync('file2.txt','utf8');
 var dict=fs.readFileSync('dict.txt','utf8');
 
-var stat=[];
-var sample={};
-var standard={};
-var results={};
+stat={
+  sample:{
+    sampleCount:0,
+    nouns:0,
+    adj:0,
+    verb:0,
+    adv:0
+  },
+  standard:{
+    standardCount:0,
+    nouns1:0,
+    adj1:0,
+    verb1:0,
+    adv1:0
+  },
+  results:{
+    perWordCount:0,
+    perNoun:0,
+    perAdj:0,
+    perVerb:0,
+    perAdv:0
+  }
+
+};
 var missSpell=0;
 var missSpell1=0;
 var percentMissSpell=0;
@@ -18,12 +38,11 @@ var textArr=tokenizer.tokenize(data);
 var textArr1=tokenizer.tokenize(data1);
 var dictArr=tokenizer.tokenize(dict);
 
-var sampleCount=textArr.length;
-var standardCount=textArr1.length;
-var perWordCount=parseInt((sampleCount/standardCount)*100);
-sample.sampleCount=sampleCount;
-standard.standardCount=standardCount;
-results.perWordCount=perWordCount;
+
+stat.sample.sampleCount=textArr.length;;
+stat.standard.standardCount=textArr1.length;;
+stat.results.perWordCount=parseInt((stat.sample.sampleCount/stat.standard.standardCount)*100);;
+
 var spellcheck= new natural.Spellcheck(dictArr);
 
 for(var i=0;i<textArr.length;i++)
@@ -36,11 +55,11 @@ for(i=0;i<textArr1.length;i++)
   if(!spellcheck.isCorrect(textArr1[i].toLowerCase()))
   missSpell1++;
 }
-percentMissSpell=parseInt((missSpell/missSpell1)*100);
 
-sample.missSpell=missSpell;
-standard.missSpell1=missSpell1;
-results.percentMissSpell=percentMissSpell;
+percentMissSpell=parseInt((missSpell/missSpell1)*100);
+stat.sample.missSpell=missSpell;
+stat.standard.missSpell1=missSpell1;
+stat.results.percentMissSpell=percentMissSpell;
 
     console.log(missSpell+"----"+missSpell1+"---"+ percentMissSpell);
 var WordPOS = require('wordpos');
@@ -51,7 +70,6 @@ var nouns,adj,verb,adv;
 var nouns1,adj1,verb1,adv1;
 var nounMatch=0,adjMatch=0,verbMatch=0,adjMatch=0;
 var perNoun,perAdj,perVerb,perAdj;
-
 wordpos.getNouns(textArr, function(result){
     nouns=result.length;
     console.log('nouns :'+nouns+'\n');
@@ -60,11 +78,11 @@ wordpos.getNouns(textArr, function(result){
         console.log('nouns1:'+nouns1+'\n');
         nounMatch=match(result,result1);
         perNoun=parseInt((nouns/nouns1)*100);
-        sample.nouns=nouns;
-        standard.nouns1=nouns1;
-        results.perNoun=perNoun;
-        results.nounMatch=nounMatch;
-        console.log(perNoun+" perNoun");
+        stat.sample.nouns=nouns;
+        stat.standard.nouns1=nouns1;
+        stat.results.perNoun=perNoun;
+        stat.results.nounMatch=nounMatch;
+        console.log(stat.results.perNoun+" perNoun");
         console.log(nounMatch+" noun matches");
     });
 });
@@ -77,10 +95,10 @@ wordpos.getAdjectives(textArr, function(result){
         console.log('adj1:'+nouns1+'\n');
         adjMatch=match(result,result1);
         perAdj=parseInt((adj/adj1)*100)
-        sample.adj=adj;
-        standard.adj1=adj1;
-        results.perAdj=perAdj;
-        results.adjMatch=adjMatch;
+        stat.sample.adj=adj;
+        stat.standard.adj1=adj1;
+        stat.results.perAdj=perAdj;
+        stat.results.adjMatch=adjMatch;
         console.log(perAdj+" perAdj");
         console.log(adjMatch+" adj matches");
     });
@@ -95,10 +113,10 @@ wordpos.getVerbs(textArr, function(result){
         console.log('verb1:'+verb1+'\n');
         verbMatch=match(result,result1);
         perVerbs=parseInt((verb/verb1)*100);
-        sample.verb=verb;
-        standard.verb1=verb1;
-        results.perVerb=perVerb;
-        results.verbMatch=verbMatch;
+        stat.sample.verb=verb;
+        stat.standard.verb1=verb1;
+        stat.results.perVerb=perVerb;
+        stat.results.verbMatch=verbMatch;
         console.log(perVerbs+" perVerb");
         console.log(verbMatch+" verb matches");
     });
@@ -112,18 +130,28 @@ wordpos.getAdverbs(textArr, function(result){
         console.log('adv1:'+adv1+'\n');
         advMatch=match(result,result1);
         perAdv=parseInt((adv/adv1)*100);
-        sample.adv=adv;
-        standard.adv1=adv1;
-        results.perAdv=perAdv;
-        results.advMatch=advMatch;
+        stat.sample.adv=adv;
+        stat.standard.adv1=adv1;
+        stat.results.perAdv=perAdv;
+        stat.results.advMatch=advMatch;
         console.log(perAdv+" perAdv");
         console.log(advMatch+" adv matches");
+
+        
+        var json=JSON.stringify(stat,null,2);
+        fs.writeFile('stat.json',json,'utf8',(err)=>{
+          if(err)
+          {
+            console.log("Error");
+            return;
+          }
+          console.log("Success");
+        });
     });
 });
 
 function match(result,result1) {
   var matchCount=0;
-  var  res=[];
   for(var i=0;i<result1.length;i++)
   {
     res[i]=result1[i].toLowerCase();
@@ -136,16 +164,3 @@ function match(result,result1) {
   }
   return matchCount;
 }
-
-stat.push(sample);
-stat.push(standard);
-stat.push(results);
-var json=JSON.stringify(stat,null,2);
-fs.writeFile('stat.json',json,'utf8',(err)=>{
-  if(err)
-  {
-    console.log("Error");
-    return;
-  }
-  console.log("Success");
-})

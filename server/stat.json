@@ -1,14 +1,29 @@
-[
-  {
+{
+  "sample": {
     "sampleCount": 33,
+    "nouns": 22,
+    "adj": 4,
+    "verb": 10,
+    "adv": 2,
     "missSpell": 5
   },
-  {
+  "standard": {
     "standardCount": 55,
+    "nouns1": 36,
+    "adj1": 11,
+    "verb1": 16,
+    "adv1": 7,
     "missSpell1": 7
   },
-  {
+  "results": {
     "perWordCount": 60,
-    "percentMissSpell": 71
+    "perNoun": 61,
+    "perAdj": 36,
+    "perAdv": 28,
+    "percentMissSpell": 71,
+    "nounMatch": 19,
+    "adjMatch": 4,
+    "verbMatch": 8,
+    "advMatch": 2
   }
-]
+}
