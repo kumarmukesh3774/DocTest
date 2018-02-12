@@ -51,6 +51,7 @@ var nouns,adj,verb,adv;
 var nouns1,adj1,verb1,adv1;
 var nounMatch=0,adjMatch=0,verbMatch=0,adjMatch=0;
 var perNoun,perAdj,perVerb,perAdj;
+
 wordpos.getNouns(textArr, function(result){
     nouns=result.length;
     console.log('nouns :'+nouns+'\n');
@@ -59,10 +60,15 @@ wordpos.getNouns(textArr, function(result){
         console.log('nouns1:'+nouns1+'\n');
         nounMatch=match(result,result1);
         perNoun=parseInt((nouns/nouns1)*100);
+        sample.nouns=nouns;
+        standard.nouns1=nouns1;
+        results.perNoun=perNoun;
+        results.nounMatch=nounMatch;
         console.log(perNoun+" perNoun");
         console.log(nounMatch+" noun matches");
     });
 });
+
 wordpos.getAdjectives(textArr, function(result){
     adj=result.length;
     console.log('adj :'+adj+'\n');
@@ -71,11 +77,16 @@ wordpos.getAdjectives(textArr, function(result){
         console.log('adj1:'+nouns1+'\n');
         adjMatch=match(result,result1);
         perAdj=parseInt((adj/adj1)*100)
+        sample.adj=adj;
+        standard.adj1=adj1;
+        results.perAdj=perAdj;
+        results.adjMatch=adjMatch;
         console.log(perAdj+" perAdj");
         console.log(adjMatch+" adj matches");
     });
 
 });
+
 wordpos.getVerbs(textArr, function(result){
     verb=result.length;
     console.log('verb :'+verb+'\n');
@@ -84,10 +95,15 @@ wordpos.getVerbs(textArr, function(result){
         console.log('verb1:'+verb1+'\n');
         verbMatch=match(result,result1);
         perVerbs=parseInt((verb/verb1)*100);
+        sample.verb=verb;
+        standard.verb1=verb1;
+        results.perVerb=perVerb;
+        results.verbMatch=verbMatch;
         console.log(perVerbs+" perVerb");
         console.log(verbMatch+" verb matches");
     });
 });
+
 wordpos.getAdverbs(textArr, function(result){
     adv=result.length;
     console.log('adv :'+adv+'\n');
@@ -96,10 +112,15 @@ wordpos.getAdverbs(textArr, function(result){
         console.log('adv1:'+adv1+'\n');
         advMatch=match(result,result1);
         perAdv=parseInt((adv/adv1)*100);
+        sample.adv=adv;
+        standard.adv1=adv1;
+        results.perAdv=perAdv;
+        results.advMatch=advMatch;
         console.log(perAdv+" perAdv");
         console.log(advMatch+" adv matches");
     });
 });
+
 function match(result,result1) {
   var matchCount=0;
   var  res=[];
@@ -115,6 +136,7 @@ function match(result,result1) {
   }
   return matchCount;
 }
+
 stat.push(sample);
 stat.push(standard);
 stat.push(results);
