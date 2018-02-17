@@ -1,6 +1,6 @@
 h1{
 text-align:center;
-margin-top: 100px;
+margin-top: 45px;
 border: 1px solid blue;
 opacity: 0.6;
 background-color: #9f2 ;
@@ -9,7 +9,18 @@ color:#826;
 border-radius: 20px;
 
 }
-#btn{
+h6{
+text-align:center;
+margin-top: 20px;
+border: 1px solid blue;
+opacity: 0.6;
+background-color: #9f2 ;
+font-family: 'Domine', serif;
+color:#826;
+border-radius: 20px;
+
+}
+#btn {
 text-align:center;
 margin-top: 50px;
 border: 1px solid blue;
@@ -20,10 +31,20 @@ color:#826;
 border-radius: 20px;
 
 }
+.res{
+  margin-top: 50px;
+  text-align:center;
+  border: 1px solid blue;
+  opacity: 0.6;
+  background-color: #111 ;
+  font-family: 'Domine', serif;
+  color:#fff;
+  border-radius: 20px;
+}
 
 
 body {
-    background-image: url("img/forest.jpg");
+    background-image: url("../../img/forest1.jpg");
     background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;

@@ -1,9 +1,9 @@
 var fs=require('fs');
 var natural=require('natural');
 
-var data=fs.readFileSync('file1.txt','utf8');
-var data1=fs.readFileSync('file2.txt','utf8');
-var dict=fs.readFileSync('dict.txt','utf8');
+var data=fs.readFileSync('docs/file1.txt','utf8');
+var data1=fs.readFileSync('docs/file2.txt','utf8');
+var dict=fs.readFileSync('docs/dict.txt','utf8');
 
 stat={
   sample:{
@@ -56,7 +56,7 @@ for(i=0;i<textArr1.length;i++)
   missSpell1++;
 }
 
-percentMissSpell=parseInt((missSpell/missSpell1)*100);
+percentMissSpell=parseInt(((missSpell1-missSpell)/missSpell1)*100);
 stat.sample.missSpell=missSpell;
 stat.standard.missSpell1=missSpell1;
 stat.results.percentMissSpell=percentMissSpell;
@@ -115,7 +115,7 @@ wordpos.getVerbs(textArr, function(result){
         perVerbs=parseInt((verb/verb1)*100);
         stat.sample.verb=verb;
         stat.standard.verb1=verb1;
-        stat.results.perVerb=perVerb;
+        stat.results.perVerb=perVerbs;
         stat.results.verbMatch=verbMatch;
         console.log(perVerbs+" perVerb");
         console.log(verbMatch+" verb matches");
@@ -137,9 +137,9 @@ wordpos.getAdverbs(textArr, function(result){
         console.log(perAdv+" perAdv");
         console.log(advMatch+" adv matches");
 
-        
+
         var json=JSON.stringify(stat,null,2);
-        fs.writeFile('stat.json',json,'utf8',(err)=>{
+        fs.writeFile('json/stat.json',json,'utf8',(err)=>{
           if(err)
           {
             console.log("Error");
